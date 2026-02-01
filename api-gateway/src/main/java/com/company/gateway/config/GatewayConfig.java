@@ -33,7 +33,8 @@ public class GatewayConfig {
                                         .setName("payrollServiceCircuitBreaker")
                                         .setFallbackUri("forward:/fallback/payroll"))
                                 .retry(retryConfig -> retryConfig
-                                        .setRetries(3)))
+                                        .setRetries(3)
+                                        .setBackoff(Duration.ofMillis(100), Duration.ofSeconds(2), 2, false)))
                         .uri("lb://payroll-service"))
 
                 // Auth Routes (No authentication needed)
